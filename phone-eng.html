@@ -1,0 +1,191 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back_ios" />
+    <style>
+        body{
+            background-color:  #333333;
+  background-size: cover;
+  
+  background-attachment: fixed;
+            margin: 0px;
+            padding: 0px;
+            max-height: 200px;
+            max-width: 600px;
+            }
+
+
+.result{
+  font-size:30px;
+}
+.mul-container{
+margin-top:100px;
+margin-left: 100px;
+    
+    text-align: center;
+    width: 60%;
+    font-size: 17px;
+    padding-left: 50px;
+    color: #bbb;
+}
+label{
+    color: white;
+    font-size: 20px;
+    display: flex;
+    padding: 0px;
+    border-radius: 20px;
+    width:200px;
+    border: 1px solid #bbb;
+    height: 30px;
+    
+}
+label input{
+float: left;
+}
+h3{
+color: white;
+font-size: 20px;
+width: 200px;
+}
+button{
+text-align: center;
+width:100px;
+height:30px;
+border-radius: 20px;
+}
+
+    </style>
+</head>
+<body>
+    
+
+            <div class="right">
+       
+  <div class="mul-container">
+
+<div id="quiz"></div>
+<button onclick="checkAnswer()">Submit</button>
+
+<p id="result" style="color:#bbb"></p>
+  </div>  
+  </div>  
+  
+   <script>
+
+
+const questions = [
+    {
+        type: "multiple_choice",
+        question: "It looks like any building.When you pass it______.",
+        options: ["on the street", "in the street", "of the street", "into the street"],
+        answer: "on the street"
+    },
+    {
+        type: "multiple_choice",
+        question: "Made of stone and glass and marble,_____and concrete.",
+        options: ["made of irons", "made of iron", "make of iron", "made of woods"],
+        answer: "made of iron"
+    },
+    {
+        type: "multiple_choice",
+        question: "_____you can ride.A camel or a train",
+        options: ["But once outsides", "But once insides", "But once outside", "But once inside"],
+        answer: "But once inside"
+    },
+    {
+        type: "multiple_choice",
+        question: "Visit rome,siam or nome,Feel_____.",
+        options: ["a hurrcane", "a hurricane", "a hurrcaine", "a harricane"],
+        answer: "a hurriance"
+    },
+    {
+        type: "multiple_choice",
+        question: "Meet a king,_____.How to bake a pie",
+        options: ["learnn to sing", "lern to sing", "larn to ing", "learn to sing"],
+        answer: "learn to sing"
+    },
+    {
+        type: "multiple_choice",
+        question: "_____,and of corse.Have all the dog you'd like,",
+        options: ["Train a dog", "Train a horse", "Train a hosre", "Train horse"],
+        answer: "Train a horse"
+    },
+    {
+        type: "multiple_choice",
+        question: "See the moon,_____,Or catch a whopping pike",
+        options: ["a sundy dune", "a sandy dane", "a sandy dune", "a sundy dane"],
+        answer: "a sundy dune"
+    },
+    {
+        type: "multiple_choice",
+        question: "Everything that_____.You'll find inside those walls.",
+        options: ["books can brings", "book can brings", "books can bring", "book can bring"],
+        answer: "book can bring"
+    },
+    {
+        type: "multiple_choice",
+        question: "_____for you to share.When adventure calls.",
+        options: ["A world is", "The world is", "The word is", "A word is"],
+        answer: "A world is"
+    },
+    {
+        type: "multiple_choice",
+        question: "You cannot tell_____.By the way the building looks,",
+        options: ["it's magic", "its magic", "it magic", "is magic"],
+        answer: "its magic"
+    },
+    {
+        type: "multiple_choice",
+        question: "But there's______.The wonderment of book.",
+        options: ["wonderment witin is", "wanderment within it", "wonderment witin it", "wonderment within it"],
+        answer: "wonderment within it"
+    }
+    
+];
+
+let currentQuestion;
+
+function loadQuestion() {
+    currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+
+    let html = `<h3>${currentQuestion.question}</h3>`;
+
+    currentQuestion.options.forEach(option => {
+        html += `
+            <label>
+                <input type="radio" name="answer" value="${option}" class="option">
+                ${option}
+            </label><br>
+        `;
+    });
+
+    document.getElementById("quiz").innerHTML = html;
+    document.getElementById("result").textContent = "";
+}
+
+function checkAnswer() {
+    const selected = document.querySelector('input[name="answer"]:checked');
+
+    if (!selected) {
+        alert("Please select an answer.");
+        return;
+    }
+
+    if (selected.value === currentQuestion.answer) {
+        document.getElementById("result").textContent = "✅ Correct!";
+    } else {
+        document.getElementById("result").textContent =
+            `❌ Wrong! Correct answer: ${currentQuestion.answer}`;
+    }
+
+    setTimeout(loadQuestion, 3000); // Load a new random question after 2 seconds
+}
+
+loadQuestion();
+</script>
+</body>
+</html>
